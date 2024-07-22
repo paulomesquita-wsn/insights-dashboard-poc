@@ -11,8 +11,8 @@ export class InfluxEventRepository implements EventRepository{
 
   async saveEvent(event: Event): Promise<void> {
     const point = new Point(event.getName())
-      .uintField('userId', event.userId)
-      .uintField('companyId', event.companyId)
+      .tag('companyId', event.companyId.toString())
+      .tag('userId', event.userId.toString())
       .uintField('routeId', event.routeId)
       .uintField('stopId', event.stopId)
       .uintField('jobId', event.jobId)

@@ -1,3 +1,4 @@
+import { GetDashboardQuery } from "./application/query/GetDashboard";
 import { GetEventsQuery } from "./application/query/GetEvents";
 import { SaveEvent } from "./application/usecase/SaveEvent";
 import { InfluxDatabaseConnection, type DatabaseConnection } from "./infra/database/DatabaseConnection";
@@ -22,5 +23,7 @@ const repositories: Repositories = {
   }
 };
 
+export const connectionDB = connections[db];
+export const getDashboard = new GetDashboardQuery(connections[db]);
 export const getEvents = new GetEventsQuery(connections[db]);
 export const saveEvent = new SaveEvent(repositories[db].eventRepository);
